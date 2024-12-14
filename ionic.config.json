@@ -1,0 +1,7 @@
+{
+  "name": "TT SlayTiers",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

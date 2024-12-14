@@ -1,0 +1,9 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ionic.ionic"]
+        }
+    },
+    "postCreateCommand": "npm install -g @ionic/cli && npm install"
+}  
