@@ -1,9 +1,11 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+    //"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+    "build": {"dockerfile": "Dockerfile"},
+    "mounts": ["source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"],
     "customizations": {
         "vscode": {
-            "extensions": ["ionic.ionic"]
+            "extensions": ["ionic.ionic", "vue.volar"]
         }
     },
-    "postCreateCommand": "npm install -g @ionic/cli && npm install"
+    "postCreateCommand": "npm install"
 }  
