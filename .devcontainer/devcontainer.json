@@ -1,6 +1,7 @@
 {
     //"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
     "build": {"dockerfile": "Dockerfile"},
+    "runArgs": ["--tty"],
     "mounts": ["source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"],
     "customizations": {
         "vscode": {
