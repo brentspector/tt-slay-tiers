@@ -7,5 +7,5 @@
             "extensions": ["ionic.ionic", "vue.volar"]
         }
     },
-    "postAttachCommand": "scripts/autoconfigure.sh"
+    "postAttachCommand": "scripts/mkenv.sh && scripts/autoconfigure.sh"
 }  

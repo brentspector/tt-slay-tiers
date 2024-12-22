@@ -61,6 +61,6 @@ If your key is named something different, run `git config --global user.signingk
 
 If your key is located somewhere different, you'll need to configure the `.devcontainer/devcontainer.json` to source the key from the correct location.
 
-If you wish to disable this, modify the `.devcontainer/devcontainer.json` to not include the mount or the `postAttachCommand` portions. Note that the `scripts/autoconfigure.sh` may have other things (like `npm install`) that are missed. You'll need to run those manually.
+If you wish to disable this, modify the `.devcontainer/devcontainer.json` to not include the mount or the `scipts/autoconfigure.sh` call in `postAttachCommand`.
 
 To configure this, follow the instructions at https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits.
