@@ -1,12 +1,11 @@
 {
-    //"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
     "build": {"dockerfile": "Dockerfile"},
     "runArgs": ["--tty"],
-    "mounts": ["source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"],
+    "mounts": ["source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind", "source=/home/${localEnv:USER}/.ssh,target=/home/node/.ssh,type=bind"],
     "customizations": {
         "vscode": {
             "extensions": ["ionic.ionic", "vue.volar"]
         }
     },
-    "postCreateCommand": "npm install"
+    "postAttachCommand": "scripts/autoconfigure.sh"
 }  

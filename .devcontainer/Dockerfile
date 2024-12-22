@@ -24,4 +24,6 @@ RUN apt-get autoremove -y \
 
 # Symlink docker socket
 RUN ln -s "/var/run/docker-host.sock" "/var/run/docker.sock"
+
+# Install global tools
 RUN npm install -g @ionic/cli

@@ -57,8 +57,11 @@ Run `npm run commit` to automatically use `Commitizen`.
 
 This repo requires every commit to be signed. To configure this locally, follow the instructions at https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
 
-If you're using GPG, you can export your private key and add it to the devcontainer through the following method:
-1. List your GPG keys via `gpg --list-secret-keys`
-2. Export the GPG key to a file via `gpg --export-secret-keys -a <key-ID> > myprivkey.gpg`, where `<key-ID>` is replaced with the key id from the list command
-3. Move the file into the repo. Assuming this repo was next to the file, you could run `mv myprivkey.gpg tt-slay-tiers`
-4. Import the key into the GPG keyring in the devcontainer via `gpg --import myprivkey.gpg`
+If you're using SSH, follow the steps at [Github SSH Signing Keys](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification)
+1. Make sure you have the SSH keys available on your local machine and not just in the devcontainer (/workspaces/tt-slay-tiers). The keys can be lost if the environment is destroyed.
+2. Place the SSH Public Key into the devcontainer
+3. Configure git to point to the SSH keys
+```bash
+git config --global gpg.format ssh
+git config --global user.signingkey PATH/TO/YOUR/KEY
+```
