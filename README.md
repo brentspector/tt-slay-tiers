@@ -55,13 +55,12 @@ Vue.js recommends combining HTML, CSS, and Javascript into one file, represented
 
 Run `npm run commit` to automatically use `Commitizen`.
 
-This repo requires every commit to be signed. To configure this locally, follow the instructions at https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+This repo requires every commit to be signed. To assist quick setup, this repo assumes you have set up SSH keys to sign commits. Notably, it expects a public SSH key named `id_git_commit` to exist in your `/home/$USER/.ssh` folder.
 
-If you're using SSH, follow the steps at [Github SSH Signing Keys](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification)
-1. Make sure you have the SSH keys available on your local machine and not just in the devcontainer (/workspaces/tt-slay-tiers). The keys can be lost if the environment is destroyed.
-2. Place the SSH Public Key into the devcontainer
-3. Configure git to point to the SSH keys
-```bash
-git config --global gpg.format ssh
-git config --global user.signingkey PATH/TO/YOUR/KEY
-```
+If your key is named something different, run `git config --global user.signingkey /home/node/.ssh/<KEY_NAME>` where `<KEY_NAME>` is replaced with the correct name.
+
+If your key is located somewhere different, you'll need to configure the `.devcontainer/devcontainer.json` to source the key from the correct location.
+
+If you wish to disable this, modify the `.devcontainer/devcontainer.json` to not include the mount or the `postAttachCommand` portions. Note that the `scripts/autoconfigure.sh` may have other things (like `npm install`) that are missed. You'll need to run those manually.
+
+To configure this, follow the instructions at https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits.
