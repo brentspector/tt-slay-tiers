@@ -1,0 +1,62 @@
+name: Build Android
+on:
+  workflow_run:
+    workflows: ["Build Vue"]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "17"
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Ionic Capacitor Build and Copy
+        run: |
+          npm ci
+          echo "attempting to install individual dependencies"
+          npm install -g @ionic/cli cordova-res
+          echo "attempting to run script"
+          scripts/build.sh
+
+      - name: Gradle Build
+        run: ./gradlew build
+        working-directory: android
+
+      - name: Assemble Release Bundle
+        run: |
+          ./gradlew bundleRelease
+        working-directory: android
+
+      - name: Sign Release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      # - name: Create service_account.json
+      #   run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      # - name: Deploy to Beta
+      #   uses: r0adkll/upload-google-play@v1
+      #   with:
+      #     serviceAccountJson: service_account.json
+      #     packageName: com.brentspector.ttststiers
+      #     releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+      #     track: beta
+      #     whatsNewDirectory: android/distribution/
