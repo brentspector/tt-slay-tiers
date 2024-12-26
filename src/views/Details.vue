@@ -1,25 +1,41 @@
 <template>
     <ion-page>
-      <ion-header :translucent="true">
+      <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button color="primary"></ion-menu-button>
-          </ion-buttons>
-          <ion-title>{{ $route.params.id }}</ion-title>
+          <ion-title>Proof of Concept - Card Search</ion-title>
         </ion-toolbar>
       </ion-header>
-  
-      <ion-content :fullscreen="true">
-        <ion-header collapse="condense">
-          <ion-toolbar>
-            <ion-title size="large">{{ $route.params.id }}</ion-title>
-          </ion-toolbar>
-        </ion-header>
-  
-        <div id="container">
-          <strong class="capitalize">{{ $route.params.id }}</strong>
-          <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-        </div>
+      <ion-content class="ion-padding">
+        <ion-button expand="block" @click="openModal">Open Modal</ion-button>
+        <p>{{ message }}</p>
       </ion-content>
     </ion-page>
   </template>
+  
+  <script lang="ts" setup>
+    import { IonButton, IonContent, IonPage, IonHeader, IonToolbar, IonTitle, modalController } from '@ionic/vue';
+    import SearchList from "@/views/SearchList.vue";
+    import { ref } from 'vue';
+    import { dummyData } from "@/data/dummy";
+  
+    const message = ref('Open the modal and click a card');
+  
+    const openModal = async () => {
+      const modal = await modalController.create({
+        component: SearchList,
+        componentProps: {
+            content: dummyData,
+            contentKey: "name",
+            label: "Select a Card"
+        }
+      });
+  
+      modal.present();
+  
+      const { data } = await modal.onWillDismiss();
+  
+      if (data) {
+        message.value = `You selected ${data.name} with cost ${data.cost}`;
+      }
+    };
+  </script>
