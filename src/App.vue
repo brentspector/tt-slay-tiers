@@ -15,7 +15,7 @@
             </ion-list-header>
 
             <ion-menu-toggle
-              auto-hide="false"
+              :auto-hide=false
               v-for="(p, i) in appPages"
               :key="i"
             >
@@ -24,7 +24,7 @@
                 router-direction="root"
                 :router-link="p.url"
                 lines="none"
-                detail="false"
+                :detail=false
                 class="hydrated"
                 :class="{ selected: selectedIndex === i }"
               >

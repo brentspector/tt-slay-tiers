@@ -7,7 +7,7 @@
         <ion-toolbar>
           <ion-searchbar
             animated
-            debounce="500"
+            :debounce=500
             show-cancel-button="focus"
             v-model="searchQuery"
           ></ion-searchbar>
@@ -17,14 +17,14 @@
         <ion-list>
           <ion-item
             v-for="value in searchResults()"
-            :key="value"
+            :key=getLoopKey(value)
             @click="confirm(value)"
             >{{ getValue(value) }}</ion-item
           >
         </ion-list>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button
-            activated="true"
+            :activated=true
             @click="cancel()"
           ></ion-fab-button>
         </ion-fab>
@@ -106,11 +106,15 @@
           return item;
         }
       };
+      const getLoopKey = (value: Record<string, any>) => {
+        return value[props.contentKey];
+      }
       const confirm = (value: any) => modalController.dismiss(value);
       const cancel = () => modalController.dismiss();
       return {
         confirm,
         cancel,
+        getLoopKey,
         getValue,
         searchQuery,
         searchResults,
