@@ -23,8 +23,9 @@ npm-debug.log*
 /.sass-cache
 /.sourcemaps
 /.versions
-/.vscode/*
+/.vscode
 !/.vscode/extensions.json
+/android
 /coverage
 /dist
 /node_modules
