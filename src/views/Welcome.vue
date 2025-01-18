@@ -49,105 +49,75 @@
               <ion-item>
                 <ion-icon
                   slot="start"
-                  :ios="iosMenuOption('Game Points')"
-                  :md="mdMenuOption('Game Points')"
+                  :ios="iosMenuOption('Tierlists')"
+                  :md="mdMenuOption('Tierlists')"
                 >
                 </ion-icon>
-                <h3>Pokemon by Point in Game</h3>
+                <h3>Tierlists</h3>
               </ion-item>
   
               <p>
-                "Game Points" will allow you to view Pokemon available based on
-                your progress in game. <code>Point in Game</code> is defined as
-                the point you have not crossed yet. For instance, If you beat
-                Julia but have not defeated Pulse Tangrowth 1, then your
-                <code>Point in Game</code> would be
-                <code>ZEL/Pulse Tangrowth 1</code>.
+                "Tierlists" will allow you to view rankings for each class' cards.
               </p>
               <p>
-                Pokemon are displayed based on the difference between one point
-                and the next. Pokemon can be displayed multiple times if they are
-                in new locations. For instance, <code>Grimer</code> is listed
-                multiple times since you can get an Old Rod prior to beating
-                Julia, and then find it in new locations after Julia.
-              </p>
-              <p>
-                Each Pokemon displayed can be clicked to open a popup with more
-                details about that Pokemon. This popup uses the same structure and
-                data as Pokemon Details.
-              </p>
-              <p>
-                This can be reached directly by adding "/points/" to the base URL.
+                This can be reached directly by adding "/tierlists/" to the base URL.
               </p>
               <!-- Section Break -->
               <ion-item>
                 <ion-icon
                   slot="start"
-                  :ios="iosMenuOption('Game Locations')"
-                  :md="mdMenuOption('Game Locations')"
+                  :ios="iosMenuOption('Blog Posts')"
+                  :md="mdMenuOption('Blog Posts')"
                 >
                 </ion-icon>
-                <h3>Pokemon by Location</h3>
+                <h3>Blog Posts</h3>
               </ion-item>
   
               <p>
-                "Game Locations" will allow you to view Pokemon available based on
-                the location selected. <code>Location</code> is defined as a
-                unique in-game location (i.e. location printed in
-                <code>Trainer Memo</code> on the Pokemon details screen) and
-                having sufficiently relevant encounters. Some areas (like
-                <code>Glitch World</code>) combine several maps with different
-                locations in order to keep things easier to manage.
+                "Blog Posts" will allow you to view blog posts about the boardgame.
               </p>
               <p>
-                Each Pokemon displayed can be clicked to open a popup with more
-                details about that Pokemon. This popup uses the same structure and
-                data as Pokemon Details.
-              </p>
-              <p>
-                This can be reached directly by adding "/locations/" to the base
+                This can be reached directly by adding "/blog/" to the base
                 URL.
               </p>
               <!-- Section Break -->
               <ion-item>
                 <ion-icon
                   slot="start"
-                  :ios="iosMenuOption('Pokemon Details')"
-                  :md="mdMenuOption('Pokemon Details')"
+                  :ios="iosMenuOption('Cards')"
+                  :md="mdMenuOption('Cards')"
                 >
                 </ion-icon>
-                <h3>Pokemon Details</h3>
+                <h3>Cards</h3>
               </ion-item>
               <p>
-                "Pokemon Details" will allow you to view game information related
-                to a specific Pokemon. This is useful for viewing what moves a
-                Pokemon can learn at a certain point in the game, as well as what
-                locations a Pokemon can be found.
+                "Cards" will allow you to view game information related
+                to a specific card.
               </p>
               <p>
-                This can be reached directly by adding "/details/" to the base
+                This can be reached directly by adding "/cards/" to the base
                 URL.
               </p>
               <!-- Section Break -->
               <ion-item>
                 <ion-icon
                   slot="start"
-                  :ios="iosMenuOption('Pokemon Details')"
-                  :md="mdMenuOption('Pokemon Details')"
+                  :ios="iosMenuOption('Cards')"
+                  :md="mdMenuOption('Cards')"
                 >
                 </ion-icon>
-                <h3>Pokemon Details by ID</h3>
+                <h3>Cards by ID</h3>
               </ion-item>
               <p>
-                "Pokemon Details" has a shortcut feature when directly navigating
-                via URL. By adding a Pokemon ID to the details URL, you can
-                directly reach the desired Pokemon.
+                "Cards" has a shortcut feature when directly navigating
+                via URL. By adding a Card ID to the details URL, you can
+                directly reach the desired card.
               </p>
               <p>Example:</p>
               <p>
-                <code>Mew</code> is ID <code>151</code>, so to reach it, you can
-                add "/details/151" to the base URL and see all the details about
-                <code>Mew</code> without needing to use the dropdown menu.
+                <code>Clash</code> is ID <code>1</code>, so to reach it, you can
+                add "/cards/1" to the base URL and see all the details about
+                <code>Clash</code> without needing to use the dropdown menu.
               </p>
               <!-- Section Break -->
               <h2>Global Options</h2>
