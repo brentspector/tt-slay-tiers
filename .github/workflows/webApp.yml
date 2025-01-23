@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
+      - name: Create .env file
+        run: |
+          echo "VITE_SPACE=${{ secrets.CONTENTFUL_SPACE_ID }}" >> .env
+          echo "VITE_ACCESS_TOKEN=${{ secrets.CONTENTFUL_CONTENT_DELIVERY_API_KEY }}" >> .env
       - name: Install dependencies
         run: npm ci
       - name: Build
