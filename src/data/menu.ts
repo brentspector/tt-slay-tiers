@@ -3,33 +3,33 @@ import {
     gridSharp,
     moonOutline,
     moonSharp,
-    navigateOutline,
-    navigateSharp,
-    pieChartOutline,
-    pieChartSharp,
-    ribbonOutline,
-    ribbonSharp,
+    barChartOutline,
+    barChartSharp,
+    journalOutline,
+    journalSharp,
+    clipboardOutline,
+    clipboardSharp
   } from "ionicons/icons";
   import { globalStore } from "@/store/global";
   
   export const appPages = [
     {
-      title: "Game Points",
-      url: "/points",
-      iosIcon: ribbonOutline,
-      mdIcon: ribbonSharp,
+      title: "Tierlists",
+      url: "/tierlists",
+      iosIcon: barChartOutline,
+      mdIcon: barChartSharp,
     },
     {
-      title: "Game Locations",
-      url: "/locations",
-      iosIcon: navigateOutline,
-      mdIcon: navigateSharp,
+      title: "Blog Posts",
+      url: "/blog",
+      iosIcon: journalOutline,
+      mdIcon: journalSharp,
     },
     {
-      title: "Pokemon Details",
-      url: "/details",
-      iosIcon: pieChartOutline,
-      mdIcon: pieChartSharp,
+      title: "Cards",
+      url: "/cards",
+      iosIcon: clipboardOutline,
+      mdIcon: clipboardSharp,
     },
   ];
   

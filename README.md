@@ -26,11 +26,21 @@ Coming soon!
 ## Build Process
 
 - Follow the [Ionic Guide](https://ionicframework.com/docs/intro/environment) for getting started building the project. **A Mac is required if you wish to develop for iOS.**
+- An [API key for Contentful](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app) is also required in a `.env` file. See below for details
 - Clone or download the repo
 - `npm install` to install dependencies
 - `ionic serve --external` to spin up the web-app
 - `ionic capacitor open ios` requires appropriate setup in a [Mac Environment](https://ionicframework.com/docs/developing/ios)
 - `ionic capacitor open andriod` requires appropriate setup with [Android Studio](https://ionicframework.com/docs/developing/android)
+
+### .env file
+1. Make a `.env` file in the root directory of this project. It should end up between `.DockerIgnore` and `.eslintignore`
+2. Add the following values, replacing everything from the `<` to `>` with the actual values obtained from Contentful
+```
+VITE_SPACE=<space id from the api key generation>
+VITE_ACCESS_TOKEN=<access token id from the api key generation>
+```
+
 
 ### Production Build
 

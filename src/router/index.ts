@@ -7,19 +7,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Welcome.vue")
   },
   {
-    path: "/points",
+    path: "/tierlists",
+    component: () => import("../views/Tierlist.vue"),
+  },
+  {
+    path: "/blog",
+    component: () => import("../views/Blog.vue"),
+  },
+  {
+    path: "/cards",
     component: () => import("../views/Details.vue"),
   },
   {
-    path: "/locations",
-    component: () => import("../views/Details.vue"),
-  },
-  {
-    path: "/details",
-    component: () => import("../views/Details.vue"),
-  },
-  {
-    path: '/details/:id',
+    path: '/cards/:id',
     component: () => import ('../views/Details.vue')
   }
 ]
