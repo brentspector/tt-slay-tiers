@@ -27,6 +27,31 @@
           </ion-col>
         </ion-item>
       </ion-list>
+      <ion-grid v-if="globalStore.state.cardFormat">
+        <ion-row>
+          <ion-col
+            size="6"
+            size-md="4"
+            size-lg="3"
+            size-xl="2.4"
+            v-for="post in posts"
+            :key="post.sys.id"
+            @click="openArticle(post.sys.id)"
+          >
+            <ion-card>
+              <img :src="getImageUrl(post)" />
+              <ion-card-header>
+                <ion-card-subtitle>
+                  {{ post.fields.summary }}
+                </ion-card-subtitle>
+                <ion-card-title class="ion-text-center">{{
+                  post.fields.title
+                }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <infinite-loading @infinite="loadMorePosts" />
     </ion-content>
   </ion-page>
