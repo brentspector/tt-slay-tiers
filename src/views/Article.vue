@@ -6,14 +6,13 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <h2>{{ article?.fields?.summary }}</h2>
-      <ion-text id="hover-trigger-wheel of change" @mouseover="setHoverTrigger('wheel of change')">Hover Over Me</ion-text>
       <ion-popover :trigger="hoverTrigger" trigger-action="hover">
         <ion-content class="ion-padding">
           <ion-spinner v-if="!isLoaded && imageUrl" name="circular" />
           <img v-if="imageUrl" :src="imageUrl" alt="Image" @load="isLoaded=true"/>
         </ion-content>
       </ion-popover>
+      <h2>{{ article?.fields?.summary }}</h2>
       <div v-html="processedContent"></div>
     </ion-content>
   </ion-page>
@@ -27,7 +26,6 @@ import {
   IonTitle,
   IonToolbar,
   IonPopover,
-  IonText,
   IonSpinner
 } from "@ionic/vue";
 import { ref, onMounted } from "vue";
@@ -75,32 +73,23 @@ const processContent = async () => {
   if (article.value) {
     const content = documentToHtmlString(article.value.fields.content);
     const matches = content.match(/\[\[(.*?)\]\]/g) || [];
-    let updatedContent = content;
 
-    matches2.value = matches.map(match => {
+    matches2.value = matches.map((match, index) => {
       const keyword = match.slice(2, -2);
-      return { keyword };
+      return { keyword, id: `hover-trigger-${index}-${Date.now()}` };
     });
 
-    for (const match of matches) {
-      const keyword = match.slice(2, -2);
-      // TODO: Figure out a way for onmouseover to work with Vue
-      const replacement = 
-      `
-      <div onmouseover="myOverFunction()">
-        <p>onmouseover</p>
-        <p id="demo3">Mouse over me! ${keyword}</p>
-       </div>
-      `;
-      updatedContent = updatedContent.replace(match, replacement);
-    }
-
-    processedContent.value = updatedContent;
+    processedContent.value = content.replace(/\[\[(.*?)\]\]/g, (_, keyword, index) => {
+      const id = `hover-trigger-${index}-${Date.now()}`;
+      return `<span id="${id}" class="hover-text" onmouseover="setHoverTrigger('${keyword}', '${id}')" style="position: relative; cursor: pointer; color: blue;">
+        ${keyword}
+      </span>`;
+    });
   }
 };
 
-const setHoverTrigger = (keyword: string) => {
-  hoverTrigger.value = `hover-trigger-${keyword}`;
+const setHoverTrigger = (keyword: string, triggerId: string) => {
+  hoverTrigger.value = `${triggerId}`;
   imageUrl.value = null; // Reset imageUrl to avoid showing the previous image
   isLoaded.value = false; // Reset isLoaded to show the spinner again
   fetchImageUrl(keyword).then(url => {
@@ -108,17 +97,15 @@ const setHoverTrigger = (keyword: string) => {
   });
 };
 
-onMounted(fetchArticle);
+onMounted(() => {
+  fetchArticle();
+  (window as any).setHoverTrigger = setHoverTrigger;
+});
 </script>
 
 <style scoped>
 img {
   display: block;
   margin-top: 10px;
-}
-
-.hover-text {
-  position: relative;
-  cursor: pointer;
 }
 </style>
