@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Vue
     environment:
-      name: github-pages
+      name: ${{ github.ref == 'refs/heads/main' && 'github-pages' || 'feature-github-pages' }}
       url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write      # to deploy to Pages
