@@ -32,6 +32,7 @@ import { ref, onMounted } from "vue";
 import { useRoute } from 'vue-router';
 import client from "@/contentful";
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { window } from '@/window';
 
 const route = useRoute();
 const articleId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
@@ -99,7 +100,7 @@ const setHoverTrigger = (keyword: string, triggerId: string) => {
 
 onMounted(() => {
   fetchArticle();
-  (window as any).setHoverTrigger = setHoverTrigger;
+  window.setHoverTrigger = setHoverTrigger;
 });
 </script>
 
