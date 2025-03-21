@@ -5,7 +5,7 @@
         <ion-title>{{ article?.fields?.title }}</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding" @mouseover="(event) => setHoverTrigger(event)">
       <ion-popover :trigger="hoverTrigger" trigger-action="hover">
         <ion-content class="ion-padding">
           <ion-spinner v-if="!isLoaded && imageUrl" name="circular" />
@@ -81,25 +81,28 @@ const processContent = async () => {
 
     processedContent.value = content.replace(/\[\[(.*?)\]\]/g, (_, keyword, index) => {
       const id = `hover-trigger-${index}-${Date.now()}`;
-      return `<span id="${id}" class="hover-text" onmouseover="setHoverTrigger('${keyword}', '${id}')" style="position: relative; cursor: pointer; color: blue;">
+      return `<span id="${id}" class="hover-text" data-keyword="${keyword}" style="position: relative; cursor: pointer; color: blue;">
         ${keyword}
       </span>`;
     });
   }
 };
 
-const setHoverTrigger = (keyword: string, triggerId: string) => {
-  hoverTrigger.value = `${triggerId}`;
-  imageUrl.value = null; // Reset imageUrl to avoid showing the previous image
-  isLoaded.value = false; // Reset isLoaded to show the spinner again
-  fetchImageUrl(keyword).then(url => {
-    imageUrl.value = url;
-  });
+const setHoverTrigger = (event: Event) => {
+  const elem = event.target as HTMLElement | null;
+  if (elem?.classList.contains("hover-text")) {
+    const keyword = elem.dataset.keyword || '';
+    hoverTrigger.value = `${elem.id}`;
+    imageUrl.value = null; // Reset imageUrl to avoid showing the previous image
+    isLoaded.value = false; // Reset isLoaded to show the spinner again
+    fetchImageUrl(keyword).then(url => {
+      imageUrl.value = url;
+    });
+  }
 };
 
 onMounted(() => {
   fetchArticle();
-  (window as any).setHoverTrigger = setHoverTrigger;
 });
 </script>
 
